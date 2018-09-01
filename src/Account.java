@@ -1,57 +1,36 @@
+import java.util.Scanner;
+
 public class Account {
     public static void main(String[] args) {
-        BankAccount b = new BankAccount();
-        System.out.println("Id: " + b.getId());
-        System.out.println("Balance: " + b.getBalance());
-        System.out.println("AnnualInteretRate: "+ b.getAnnualInterestRate());
+        BankAccount[] bankAccounts = new BankAccount[2];
+        bankAccounts[0] = new BankAccount();
+        bankAccounts[1] = new BankAccount(2, 500000, 3.5);
+        System.out.println("------Menu------");
+        System.out.println("1.Check Balance");
+        System.out.println("2. Withdraw");
+        System.out.println("3. Deposit");
+        System.out.println("4. Exit");
+
+        System.out.println("Enter your choice: ");
+        Scanner scanner = new Scanner(System.in);
+        int choose = scanner.nextInt();
+        if (choose == 1) {
+            System.out.println("Balance: "+ bankAccounts[1].getBalance());
+        } else if (choose == 2) {
+            System.out.println("How much money you want withdraw: ");
+            int withdraw = scanner.nextInt();
+            bankAccounts[1].setBalance(bankAccounts[1].getBalance()- withdraw);
+            System.out.println("Balance: "+ bankAccounts[1].getBalance());
+        } else if (choose == 3) {
+            System.out.println("How much money you want deposit: ");
+            int deposit = scanner.nextInt();
+            bankAccounts[1].setBalance(bankAccounts[1].getBalance() + deposit);
+            System.out.println("Balance: " + bankAccounts[1].getBalance());
+        } else {
+            System.exit(0);
+        }
+
     }
 
 }
 
- class BankAccount {
-     private int id;
-     private double balance;
-     private double annualInterestRate;
-
-     public BankAccount() {
-         id = 1;
-         balance = 20000;
-         annualInterestRate = 4.5;
-     }
-
-     public int getId() {
-         return id;
-     }
-
-     public void setId(int id) {
-         this.id = id;
-     }
-
-     public double getBalance() {
-         return balance;
-     }
-
-     public void setBalance(double balance) {
-         this.balance = balance;
-     }
-
-     public double getAnnualInterestRate() {
-         return annualInterestRate;
-     }
-
-     public void setAnnualInterestRate(double annualInterestRate) {
-         this.annualInterestRate = annualInterestRate;
-     }
-
-     public double withdraw(double moneyWithDraw) {
-         double money = getBalance() - moneyWithDraw;
-         return money;
-     }
-
-     public double deposit(double moneyDeposit) {
-         double money = getBalance() +moneyDeposit;
-         return money;
-     }
-
-
-}
